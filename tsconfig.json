@@ -1,0 +1,20 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"noFallthroughCasesInSwitch": true,
+		"experimentalDecorators": true,
+		"esModuleInterop": true,
+		"isolatedModules": false,
+		"jsx": "react",
+		"lib": ["es2017", "dom"],
+		"moduleResolution": "node",
+		"strict": true,
+		"target": "es2017",
+		"declaration": true,
+		"module": "commonjs",
+		"resolveJsonModule": true,
+		"outDir": "dist"
+	},
+	"exclude": ["node_modules", "dist"]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "react-statey",
+  "version": "1.0.0",
+  "description": "Simple global state hook",
+  "main": "dist/index.js",
+  "repository": "https://github.com/sammysaglam/react-statey",
+  "author": "Sammy Saglam <sammy@saglam.cc>",
+  "license": "MIT",
+  "scripts": {
+    "build": "rimraf dist && tsc"
+  },
+  "dependencies": {
+    "nanoid": "^3.1.11"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.43",
+    "eslint": "^7.5.0",
+    "eslint-sammy-preset": "^18.0.1",
+    "react": "^16.8.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.9.7"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0"
+  }
+}
