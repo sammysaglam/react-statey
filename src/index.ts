@@ -3,36 +3,7 @@ import { nanoid } from 'nanoid';
 
 const store: any = {};
 
-export function createState<T>(
-	defaultValue: T,
-): {
-	key: string;
-	value: T;
-};
-export function createState(): {
-	key: string;
-	value: undefined;
-};
-export function createState(defaultValue?: any): any {
-	const key = nanoid();
-
-	store[key] = {
-		value: defaultValue,
-		subscriptions: {},
-		setValue: (newValue: any) => {
-			store[key].value =
-				typeof newValue === 'function' ? newValue(store[key].value) : newValue;
-
-			Object.values(
-				store[key].subscriptions,
-			).forEach((updateSubscribers: any) => updateSubscribers());
-		},
-	};
-
-	return { key, value: store[key].value };
-}
-
-export function useStateyState<T>({ key }: { key: string; value: T }) {
+function useStateyState<T>(key: string) {
 	const [_, forceUpdate] = useState(0);
 
 	useEffect(() => {
@@ -52,4 +23,32 @@ export function useStateyState<T>({ key }: { key: string; value: T }) {
 		T,
 		(newValue: T | ((currentValue: T) => T)) => void,
 	];
+}
+
+export function createState<T>(
+	defaultValue: T,
+): () => [T, (newValue: T | ((currentValue: T) => T)) => void];
+
+export function createState(): () => [
+	any,
+	(newValue: any | ((currentValue: any) => any)) => void,
+];
+
+export function createState(defaultValue?: any): any {
+	const key = nanoid();
+
+	store[key] = {
+		value: defaultValue,
+		subscriptions: {},
+		setValue: (newValue: any) => {
+			store[key].value =
+				typeof newValue === 'function' ? newValue(store[key].value) : newValue;
+
+			Object.values(
+				store[key].subscriptions,
+			).forEach((updateSubscribers: any) => updateSubscribers());
+		},
+	};
+
+	return () => useStateyState(key);
 }
