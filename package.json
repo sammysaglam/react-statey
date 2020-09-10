@@ -1,6 +1,6 @@
 {
   "name": "react-statey",
-  "version": "2.0.1",
+  "version": "2.1.2",
   "description": "Simple global state hook",
   "main": "dist/index.js",
   "repository": "https://github.com/sammysaglam/react-statey",

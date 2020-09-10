@@ -19,19 +19,21 @@ function useStateyState<T>(key: string) {
 		};
 	}, [_]);
 
-	return [store[key].value, store[key].setValue] as [
+	return [store[key].value, store[key].setValue, store[key].getValue] as [
 		T,
 		(newValue: T | ((currentValue: T) => T)) => void,
+		() => T,
 	];
 }
 
 export function createState<T>(
 	defaultValue: T,
-): () => [T, (newValue: T | ((currentValue: T) => T)) => void];
+): () => [T, (newValue: T | ((currentValue: T) => T)) => void, () => T];
 
 export function createState(): () => [
 	any,
 	(newValue: any | ((currentValue: any) => any)) => void,
+	() => any,
 ];
 
 export function createState(defaultValue?: any): any {
@@ -48,6 +50,7 @@ export function createState(defaultValue?: any): any {
 				store[key].subscriptions,
 			).forEach((updateSubscribers: any) => updateSubscribers());
 		},
+		getValue: () => store[key].value,
 	};
 
 	return () => useStateyState(key);
